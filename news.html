@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="/icone.ico" type="image/x-icon">
   <title>Notícias | LINCE</title>
   <style>
     /* Reset básico */
@@ -133,12 +134,29 @@
       font-size: 2rem;
       color: #004d7a;
       margin-bottom: 15px;
+        text-align: center;
     }
     #news-article p {
       font-size: 1rem;
       line-height: 1.6;
       color: #333;
     }
+    .img-wrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 9/16 = 0.5625 -> 56.25% */
+  overflow: hidden;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.img-wrapper img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
 
     /*===================== FOOTER =====================*/
     footer {
@@ -192,11 +210,13 @@
 
   <!-- Conteúdo da Notícia -->
   <main class="offset-top">
-    <article id="news-article">
-      <h1 id="news-title">Carregando...</h1>
-      <img id="news-img" src="" alt="Imagem da Notícia">
-      <p id="news-content"></p>
-    </article>
+<article id="news-article">
+  <h1 id="news-title">Carregando...</h1>
+  <div class="img-wrapper">
+    <img id="news-img" src="" alt="Imagem da Notícia">
+  </div>
+  <p id="news-content"></p>
+</article>
   </main>
 
   <!-- Footer -->
@@ -212,31 +232,30 @@
 
     // Dados das notícias em PT e EN
     const newsData = {
-      comp1: {
-        pt: {
-          title: 'Hackathon Unesp 2024',
-          image: 'img/comp1.jpg',
-          content: 'No Hackathon Unesp 2024, a equipe LINCE conquistou o 2º lugar desenvolvendo um sistema de detecção de fake news em tempo real, usando NLP e aprendizagem profunda.'
-        },
-        en: {
-          title: 'Unesp Hackathon 2024',
-          image: 'img/comp1.jpg',
-          content: 'At the Unesp Hackathon 2024, Team LINCE won 2nd place with a real-time fake news detection system using NLP and deep learning.'
-        }
-      },
-      comp2: {
-        pt: {
-          title: 'LaFusion 2023',
-          image: 'img/comp2.jpg',
-          content: 'Em LaFusion 2023, nosso paper “Redes Neurais para Previsão de Chuvas Intensas” foi premiado como Best Paper Runner-up, destacando-se pela métrica AUC-ROC de 0.89.'
-        },
-        en: {
-          title: 'LaFusion 2023',
-          image: 'img/comp2.jpg',
-          content: 'At LaFusion 2023, our paper “Neural Networks for Intense Rainfall Prediction” won Best Paper Runner-up, noted for its 0.89 AUC-ROC metric.'
-        }
-      },
-     
+  comp1: {
+    pt: {
+      title: 'Embedded Systems Competition (ESC) 2024',
+      image: 'comp1.png',
+      content: `A participação da Liga Acadêmica LINCE na Embedded Systems Competition (ESC) 2024 resultou no desenvolvimento de um sistema embarcado de baixo custo e alta eficiência para prever anomalias de precipitação em regiões vulneráveis, combinando redes neurais LSTM e técnicas de TinyML. Utilizando microcontroladores ESP32 e sensores ambientais, o sistema realiza inferência local, mesmo sem acesso à internet, e envia alertas em tempo real via dashboard acessível à comunidade. A solução é escalável, econômica e socialmente relevante, contribuindo com a mitigação de desastres naturais em áreas com infraestrutura limitada.
+
+O projeto proporcionou forte integração entre ensino, pesquisa e extensão. Os discentes aplicaram conhecimentos teóricos em um problema real, envolvendo eletrônica, aprendizado de máquina, comunicação sem fio (LoRaMesh) e ciência de dados. A experiência prática foi complementada por apresentações técnicas, validação experimental e trabalho em equipe sob pressão, resultando em amadurecimento acadêmico, técnico e pessoal.
+
+Entre os principais resultados, destaca-se a classificação para a final da competição nacional e a construção de um protótipo funcional. A iniciativa também inspirou planos para novas participações em eventos futuros, como a ESC 2025.
+
+A atuação da Liga LINCE na ESC 2024 representa um exemplo concreto de como iniciativas estudantis podem gerar impacto social, formar engenheiros preparados para os desafios contemporâneos e contribuir com soluções tecnológicas acessíveis e sustentáveis.`
+    },
+    en: {
+      title: 'Embedded Systems Competition (ESC) 2024',
+      image: 'comp1.png',
+      content: `LINCE Academic League's participation in the Embedded Systems Competition (ESC) 2024 resulted in the development of a low-cost, high-efficiency embedded system to predict precipitation anomalies in vulnerable regions, combining LSTM neural networks and TinyML techniques. Using ESP32 microcontrollers and environmental sensors, the system performs local inference even without internet access, and sends real-time alerts via a community-accessible dashboard. The solution is scalable, cost-effective, and socially relevant, contributing to the mitigation of natural disasters in areas with limited infrastructure.
+
+The project fostered strong integration between teaching, research, and outreach. Students applied theoretical knowledge to a real-world problem, involving electronics, machine learning, wireless communication (LoRaMesh), and data science. Practical experience was complemented by technical presentations, experimental validation, and teamwork under pressure, resulting in academic, technical, and personal growth.
+
+Key outcomes include qualification for the national competition finals and the development of a working prototype. The initiative also inspired plans for future event participation, such as ESC 2025.
+
+LINCE's role in ESC 2024 exemplifies how student-led initiatives can generate social impact, train engineers for contemporary challenges, and deliver accessible, sustainable technological solutions.`
+    }
+  },
     };
 
     // Traduções da própria navbar/rodapé
