@@ -17,20 +17,17 @@
       background-color: #f5f5f5;
       color: #333;
     }
-
    /* ====================== NAVBAR ====================== */
-    /*===================== BARRA DE NAVEGAÇÃO =====================*/
     nav {
       width: 100%;
       background: #03396c;
       position: fixed;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
       z-index: 999;
       box-shadow: 0 2px 5px rgba(0,0,0,0.3);
       display: flex;
       align-items: center;
-      justify-content: space-between; /* ajustado para espaçar nav-links e language-switcher */
+      justify-content: space-between;
       padding: 0 10px;
     }
     .menu-icon {
@@ -43,11 +40,8 @@
     #nav-links {
       display: flex;
       list-style: none;
-      transition: all 0.3s ease;
     }
-    #nav-links li {
-      margin: 0 10px;
-    }
+    #nav-links li { margin: 0 10px; }
     #nav-links li a {
       color: #fff;
       text-decoration: none;
@@ -61,40 +55,24 @@
       background-color: #80d0c7;
       color: #fff;
     }
-
-/* ====================== RESPONSIVO ====================== */
-@media (max-width: 768px) {
-  .menu-icon {
-    display: block;
-  }
-
-  /* esconde os links e mostra só quando .show for aplicado */
-  #nav-links {
-    display: none;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    flex-direction: column;
-    background: #03396c;
-  }
-  #nav-links.show {
-    display: flex;
-  }
-
-  /* cada link ocupa toda largura */
-  #nav-links li {
-    width: 100%;
-  }
-  #nav-links li a {
-    display: block;
-    padding: 15px 20px;
-    border-bottom: 1px solid rgba(255,255,255,0.2);
-  }
-}
-
-
-    /*===================== LANGUAGE SWITCHER =====================*/
+    /* RESPONSIVO */
+    @media (max-width: 768px) {
+      .menu-icon { display: block; }
+      #nav-links {
+        display: none;
+        position: absolute;
+        top: 60px; left: 0;
+        width: 100%;
+        flex-direction: column;
+        background: #03396c;
+      }
+      #nav-links.show { display: flex; }
+      #nav-links li { width: 100%; }
+      #nav-links li a {
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+      }
+    }
+    /* LANGUAGE SWITCHER */
     .language-switcher {
       display: flex;
       gap: 8px;
@@ -114,12 +92,9 @@
       background-color: #80d0c7;
       color: #03396c;
     }
+    .offset-top { margin-top: 70px; }
 
-    .offset-top {
-      margin-top: 70px;
-    }
-
-    /*===================== MAIN / ARTICLE =====================*/
+    /* MAIN / ARTICLE */
     main {
       max-width: 800px;
       margin: 120px auto 40px;
@@ -134,58 +109,36 @@
       font-size: 2rem;
       color: #004d7a;
       margin-bottom: 15px;
-        text-align: center;
+      text-align: center;
     }
-    #news-article p {
+    #news-article .content {
       font-size: 1rem;
       line-height: 1.6;
       color: #333;
     }
+
     .img-wrapper {
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%; /* 9/16 = 0.5625 -> 56.25% */
-  overflow: hidden;
-  border-radius: 8px;
-  margin-bottom: 20px;
-}
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      overflow: hidden;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .img-wrapper img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
 
-.img-wrapper img {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-}
-
-
-    /*===================== FOOTER =====================*/
+    /* FOOTER */
     footer {
       text-align: center;
       background-color: #004d7a;
       color: #fff;
       padding: 20px;
       margin-top: 40px;
-    }
-
-    /*===================== RESPONSIVO =====================*/
-    @media (max-width: 768px) {
-      .menu-icon { display: block; }
-      #nav-links {
-        display: none;
-        flex-direction: column;
-        background-color: #03396c;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: 100%;
-      }
-      #nav-links.show { display: flex; }
-      #nav-links li {
-        margin: 0;
-      }
-      #nav-links li a {
-        border-bottom: 1px solid rgba(255,255,255,0.2);
-      }
     }
   </style>
 </head>
@@ -207,16 +160,15 @@
     </div>
   </nav>
 
-
   <!-- Conteúdo da Notícia -->
   <main class="offset-top">
-<article id="news-article">
-  <h1 id="news-title">Carregando...</h1>
-  <div class="img-wrapper">
-    <img id="news-img" src="" alt="Imagem da Notícia">
-  </div>
-  <p id="news-content"></p>
-</article>
+    <article id="news-article">
+      <h1 id="news-title">Carregando...</h1>
+      <div class="img-wrapper">
+        <img id="news-img" src="" alt="Imagem da Notícia">
+      </div>
+      <div id="news-content" class="content"></div>
+    </article>
   </main>
 
   <!-- Footer -->
@@ -225,40 +177,128 @@
   </footer>
 
   <script>
-      // Toggle menu mobile
     function toggleMenu() {
       document.getElementById('nav-links').classList.toggle('show');
     }
 
-    // Dados das notícias em PT e EN
     const newsData = {
-  comp1: {
-    pt: {
-      title: 'Embedded Systems Competition (ESC) 2024',
-      image: 'comp1.png',
-      content: `A participação da Liga Acadêmica LINCE na Embedded Systems Competition (ESC) 2024 resultou no desenvolvimento de um sistema embarcado de baixo custo e alta eficiência para prever anomalias de precipitação em regiões vulneráveis, combinando redes neurais LSTM e técnicas de TinyML. Utilizando microcontroladores ESP32 e sensores ambientais, o sistema realiza inferência local, mesmo sem acesso à internet, e envia alertas em tempo real via dashboard acessível à comunidade. A solução é escalável, econômica e socialmente relevante, contribuindo com a mitigação de desastres naturais em áreas com infraestrutura limitada.
-
-O projeto proporcionou forte integração entre ensino, pesquisa e extensão. Os discentes aplicaram conhecimentos teóricos em um problema real, envolvendo eletrônica, aprendizado de máquina, comunicação sem fio (LoRaMesh) e ciência de dados. A experiência prática foi complementada por apresentações técnicas, validação experimental e trabalho em equipe sob pressão, resultando em amadurecimento acadêmico, técnico e pessoal.
-
-Entre os principais resultados, destaca-se a classificação para a final da competição nacional e a construção de um protótipo funcional. A iniciativa também inspirou planos para novas participações em eventos futuros, como a ESC 2025.
-
-A atuação da Liga LINCE na ESC 2024 representa um exemplo concreto de como iniciativas estudantis podem gerar impacto social, formar engenheiros preparados para os desafios contemporâneos e contribuir com soluções tecnológicas acessíveis e sustentáveis.`
-    },
-    en: {
-      title: 'Embedded Systems Competition (ESC) 2024',
-      image: 'comp1.png',
-      content: `LINCE Academic League's participation in the Embedded Systems Competition (ESC) 2024 resulted in the development of a low-cost, high-efficiency embedded system to predict precipitation anomalies in vulnerable regions, combining LSTM neural networks and TinyML techniques. Using ESP32 microcontrollers and environmental sensors, the system performs local inference even without internet access, and sends real-time alerts via a community-accessible dashboard. The solution is scalable, cost-effective, and socially relevant, contributing to the mitigation of natural disasters in areas with limited infrastructure.
-
-The project fostered strong integration between teaching, research, and outreach. Students applied theoretical knowledge to a real-world problem, involving electronics, machine learning, wireless communication (LoRaMesh), and data science. Practical experience was complemented by technical presentations, experimental validation, and teamwork under pressure, resulting in academic, technical, and personal growth.
-
-Key outcomes include qualification for the national competition finals and the development of a working prototype. The initiative also inspired plans for future event participation, such as ESC 2025.
-
-LINCE's role in ESC 2024 exemplifies how student-led initiatives can generate social impact, train engineers for contemporary challenges, and deliver accessible, sustainable technological solutions.`
-    }
+// Texto formatado com <p> e <br/> para respeitar quebras de linha
+comp1: {
+  pt: {
+    title: 'Embedded Systems Competition (ESC) 2024',
+    image: 'comp1.jpeg',
+    content: `
+      <p>A participação da Liga Acadêmica LINCE na Embedded Systems Competition (ESC) 2024 resultou no desenvolvimento de um sistema embarcado de baixo custo e alta eficiência para prever anomalias de precipitação em regiões vulneráveis, combinando redes neurais LSTM e técnicas de TinyML.</p>
+      <p>Utilizando microcontroladores ESP32 e sensores ambientais, o sistema realiza inferência local, mesmo sem acesso à internet, e envia alertas em tempo real via dashboard acessível à comunidade.</p>
+      <p>A solução é escalável, econômica e socialmente relevante, contribuindo com a mitigação de desastres naturais em áreas com infraestrutura limitada.</p>
+      <p>O projeto proporcionou forte integração entre ensino, pesquisa e extensão. Os discentes aplicaram conhecimentos teóricos em um problema real, envolvendo eletrônica, aprendizado de máquina, comunicação sem fio (LoRaMesh) e ciência de dados.</p>
+      <p>A experiência prática foi complementada por apresentações técnicas, validação experimental e trabalho em equipe sob pressão, resultando em amadurecimento acadêmico, técnico e pessoal.</p>
+      <p>Entre os principais resultados, destaca-se a classificação para a final da competição nacional e a construção de um protótipo funcional.</p>
+      <p>A iniciativa também inspirou planos para novas participações em eventos futuros, como a ESC 2025.</p>
+      <p>A atuação da Liga LINCE na ESC 2024 representa um exemplo concreto de como iniciativas estudantis podem gerar impacto social, formar engenheiros preparados para os desafios contemporâneos e contribuir com soluções tecnológicas acessíveis e sustentáveis.</p>
+    `
   },
+  en: {
+    title: 'Embedded Systems Competition (ESC) 2024',
+    image: 'comp1.jpeg',
+    content: `
+      <p>LINCE Academic League's participation in the Embedded Systems Competition (ESC) 2024 resulted in the development of a low-cost, high-efficiency embedded system to predict precipitation anomalies in vulnerable regions, combining LSTM neural networks and TinyML techniques.</p>
+      <p>Using ESP32 microcontrollers and environmental sensors, the system performs local inference even without internet access, and sends real-time alerts via a community-accessible dashboard.</p>
+      <p>The solution is scalable, cost-effective, and socially relevant, contributing to the mitigation of natural disasters in areas with limited infrastructure.</p>
+      <p>The project fostered strong integration between teaching, research, and outreach. Students applied theoretical knowledge to a real-world problem, involving electronics, machine learning, wireless communication (LoRaMesh), and data science.</p>
+      <p>Practical experience was complemented by technical presentations, experimental validation, and teamwork under pressure, resulting in academic, technical, and personal growth.</p>
+      <p>Key outcomes include qualification for the national competition finals and the development of a working prototype.</p>
+      <p>The initiative also inspired plans for future event participation, such as ESC 2025.</p>
+      <p>LINCE's role in ESC 2024 exemplifies how student-led initiatives can generate social impact, train engineers for contemporary challenges, and deliver accessible, sustainable technological solutions.</p>
+    `
+  }
+},
+
+comp2: {
+  pt: {
+    title: 'I SiCAm e VIII JoGAAm',
+    image: 'comp2.jpeg',
+    content: `
+      <p>Programa da UNESP Sorocaba antecipa tempestades em até 48 horas e ganha destaque no G1.</p>
+      <p><strong>Sorocaba (SP), 27 de maio de 2025</strong> – Um sistema híbrido de aprendizado profundo desenvolvido por Matheus Lima, estudante de Engenharia da UNESP Sorocaba, pode antecipar tempestades com até 48 horas de antecedência, oferecendo um recurso estratégico para a Defesa Civil e comunidades em áreas de risco.</p>
+      <p>O trabalho, coordenado pelos professores Leopoldo André Dutra Lusquino (ICTS) e William Dantas Vichete (Engenharia Ambiental), foi tema de reportagem no portal g1 Sorocaba e Jundiaí, assinada por Fabrício Rocha em 26/05/2025 às 12h21.</p>
+      <p>O projeto surgiu na disciplina de Deep Learning, quando Matheus alimentou o “cérebro” do modelo com dados pluviométricos do Instituto Nacional de Meteorologia (INMet).</p>
+      <p>“Identifiquei que tempestades intensas não eram bem previstas por modelos tradicionais, por isso desenvolvi um sistema misto que combina LSTM, GRU, variantes bidirecionais e um algoritmo de stacking para reforçar a detecção de eventos extremos”, explicou Matheus ao g1.</p>
+      <p>Após dez meses de testes com séries históricas de Sorocaba, o sistema alcançou 40% de acertos na detecção de episódios de chuva intensa — desempenho considerado promissor pelos orientadores.</p>
+      <p>Matheus incorporou também variáveis meteorológicas como temperatura, umidade e pressão atmosférica para maximizar a robustez do modelo.</p>
+      <p>O avanço foi apresentado por Matheus nos eventos I SiCAm e VIII JoGAAm, ambos sobre “Gestão de Desastres e Sistemas Complexos no contexto de Mudanças Climáticas”, realizados na Universidade Federal de São Carlos (UFSCar).</p>
+      <p>Especialistas em meteorologia e gestão de riscos validaram a metodologia e sugeriram refinamentos para aumentar ainda mais a sensibilidade do sistema.</p>
+      <p>Além do destaque no G1, Matheus preparou a submissão de um paper a uma revista de alto impacto nas áreas ambiental e de computação, com publicação prevista ainda em 2025.</p>
+      <p>O objetivo é ampliar o alcance da pesquisa e facilitar a integração do sistema a plataformas de alerta precoce em nível nacional e internacional.</p>
+      <p>Com as chuvas extremas se tornando mais frequentes, a iniciativa de Matheus Lima demonstra como a aplicação de técnicas avançadas de deep learning pode salvar vidas e reduzir prejuízos em períodos de instabilidade climática.</p>
+    `
+  },
+  en: {
+    title: 'I SiCAm and VIII JoGAAm',
+    image: 'comp2.jpeg',
+    content: `
+      <p>UNESP Sorocaba program anticipates storms up to 48 hours in advance and is featured on G1.</p>
+      <p><strong>Sorocaba (SP), May 27, 2025</strong> – A hybrid deep learning system developed by Matheus Lima, an engineering student at the São Paulo State University (Unesp) in Sorocaba, can forecast storms up to 48 hours in advance, offering a strategic resource for Civil Defense and at-risk communities.</p>
+      <p>The work, supervised by Professors Leopoldo André Dutra Lusquino (ICTS) and William Dantas Vichete (Environmental Engineering), was featured on the G1 Sorocaba and Jundiaí portal in an article by Fabrício Rocha on May 26, 2025 at 12:21 PM.</p>
+      <p>The project emerged in the Deep Learning course when Matheus fed the model’s “brain” with pluviometric data from the National Institute of Meteorology (INMet).</p>
+      <p>“I found that intense storms were poorly predicted by traditional models, so I developed a hybrid system combining LSTM, GRU, bidirectional variants, and a stacking algorithm to strengthen the detection of extreme events,” Matheus explained to G1.</p>
+      <p>After ten months of testing with Sorocaba’s historical series, the system achieved a 40% success rate in identifying heavy rainfall episodes — a performance praised by his advisors.</p>
+      <p>Matheus also incorporated meteorological variables such as temperature, humidity, and atmospheric pressure to maximize the model’s robustness.</p>
+      <p>The breakthrough was presented by Matheus at the I SiCAm and VIII JoGAAm events, both themed “Disaster Management and Complex Systems in the Context of Climate Change,” held at the Federal University of São Carlos (UFSCar).</p>
+      <p>Meteorology and risk management experts validated the methodology and suggested refinements to further enhance the system’s sensitivity.</p>
+      <p>In addition to the G1 coverage, Matheus prepared the submission of a paper to a high-impact journal in environmental and computing fields, with publication expected in 2025.</p>
+      <p>The aim is to broaden the reach of the research and facilitate integration of the system into early-warning platforms nationally and internationally.</p>
+      <p>With extreme rainfall events becoming more frequent, Matheus Lima’s initiative demonstrates how the application of advanced deep learning techniques can save lives and reduce losses during periods of climatic instability.</p>
+    `
+  }
+},
+
+      comp3: {
+        pt: {
+          title: 'Conheça a nova Gestão da LINCE',
+          image: 'comp3.jpeg',
+          content: `
+            <p>A LINCE – Liga de Inteligência Neural e Competitiva da UNESP Sorocaba – acaba de anunciar sua gestão para 2025/26 em uma série de posts nas redes sociais.</p>
+            <p>A equipe é formada por:</p>
+            <p><strong>Kaio Lopes</strong> (Turma ECA XX, membro desde 2023) – Presidente Executivo<br/>
+            “A Lince tem um potencial enorme. Estive presente desde a fundação, e ver o quanto crescemos até aqui é incrível. Agora, presidir essa próxima fase é uma honra e um desafio que abraço com entusiasmo.”</p>
+            <p><strong>Daniel Macedo</strong> (Turma ECA XX, membro desde 2023) – Vice-presidente<br/>
+            “Estou animado por fazer parte de mais um ano na gestão da Lince, agora com novas responsabilidades e atribuições, porém com o mesmo entusiasmo de sempre.”</p>
+            <p><strong>Rafael Campanini</strong> (Turma ECA XIX, membro desde 2023) – Diretor de Ensino<br/>
+            “Participo da Lince desde sua fundação, acompanhando a primeira gestão. Hoje, com pesquisas e projetos mais bem consolidados, mantenho o objetivo de promover e democratizar o ensino de IA pela liga, agora buscando ampliar seu alcance e fortalecer uma cultura acadêmica dinâmica e viva.”</p>
+            <p><strong>Enzo Esteban</strong> (Turma ECA XIX, membro desde 2024) – Diretor de Pesquisa e Extensão<br/>
+            “Assumir a diretoria de Pesquisa e Extensão é mais do que liderar projetos — é criar pontes entre a universidade e a sociedade, fomentar iniciativas que ampliem o alcance da nossa produção científica e transformem ideias em soluções concretas.”</p>
+            <p><strong>Caio Morais</strong> (Turma ECA XXII, membro desde 2024) – Diretor de Marketing<br/>
+            “A Lince é uma liga cuja excelência em pesquisa e ensino nunca deixa de me impressionar. Por isso, assumi a missão de utilizar o marketing como ferramenta para demonstrar ao mundo o potencial e a grandiosidade da nossa liga!”</p>
+            <p><strong>Lucas Yuta</strong> (Turma ECA XXII, membro desde 2024) – Diretor de Tesouraria<br/>
+            “A Lince está só começando e tem um potencial enorme para ser explorado. Como diretor de tesouraria, espero contribuir para criar uma base sólida da liga para que siga crescendo com responsabilidade e inovação.”</p>
+            <p>Parabéns a toda a equipe 2025/26 pela liderança e pelos planos ambiciosos para fortalecer a comunidade de Inteligência Artificial na UNESP Sorocaba.</p>
+          `
+        },
+        en: {
+          title: 'Meet the new LINCE Management',
+          image: 'comp3.jpeg',
+          content: `
+            <p>LINCE – Neural and Competitive Intelligence League at UNESP Sorocaba – has just unveiled its 2025/26 leadership team in a series of social media posts.</p>
+            <p>The board is composed of:</p>
+            <p><strong>Kaio Lopes</strong> (Class ECA XX, member since 2023) – Executive President<br/>
+            “LINCE has enormous potential. I’ve been here since its founding, and seeing how much we’ve grown is incredible. Leading this next phase is an honor and a challenge I embrace with enthusiasm.”</p>
+            <p><strong>Daniel Macedo</strong> (Class ECA XX, member since 2023) – Vice-President<br/>
+            “I’m excited to be part of another year in LINCE’s management, now with new responsibilities and roles, but with the same enthusiasm as always.”</p>
+            <p><strong>Rafael Campanini</strong> (Class ECA XIX, member since 2023) – Director of Education<br/>
+            “I’ve been part of LINCE since its foundation, following the first administration. Today, with more consolidated research and projects, I aim to promote and democratize AI education through the league, expanding its reach and strengthening a dynamic academic culture.”</p>
+            <p><strong>Enzo Esteban</strong> (Class ECA XIX, member since 2024) – Director of Research & Extension<br/>
+            “Assuming the Research & Extension Directorate is more than leading projects; it’s about building bridges between the university and society, fostering initiatives that extend our scientific output and turn ideas into concrete solutions.”</p>
+            <p><strong>Caio Morais</strong> (Class ECA XXII, member since 2024) – Director of Marketing<br/>
+            “LINCE is a league whose excellence in research and teaching never ceases to impress me. That’s why I took on the mission of using marketing to showcase our league’s potential and grandeur to the world!”</p>
+            <p><strong>Lucas Yuta</strong> (Class ECA XXII, member since 2024) – Director of Treasury<br/>
+            “LINCE is just getting started and has tremendous potential to be explored. As treasury director, I hope to help build a solid foundation so the league can keep growing responsibly and innovatively.”</p>
+            <p>Congratulations to the entire 2025/26 team for their leadership and ambitious plans to strengthen the AI community at UNESP Sorocaba.</p>
+          `
+        }
+      }
     };
 
-    // Traduções da própria navbar/rodapé
     const T = {
       pt: {
         nav_sobre: 'Sobre Nós',
@@ -278,31 +318,27 @@ LINCE's role in ESC 2024 exemplifies how student-led initiatives can generate so
       }
     };
 
-    // Lê query param e idioma atual
     const params = new URLSearchParams(location.search);
     const key = params.get('news');
     let lang = document.documentElement.lang.startsWith('en') ? 'en' : 'pt';
 
     function loadArticle() {
       const entry = newsData[key] || {};
-      const data = entry[lang] || { title:'Notícia não encontrada', image:'', content:'Verifique o link.' };
-      document.getElementById('news-title').textContent    = data.title;
-      document.getElementById('news-img').src             = data.image;
-      document.getElementById('news-img').alt             = data.title;
-      document.getElementById('news-content').textContent = data.content;
+      const data = entry[lang] || { title:'Notícia não encontrada', image:'', content:'<p>Verifique o link.</p>' };
+      document.getElementById('news-title').textContent  = data.title;
+      document.getElementById('news-img').src            = data.image;
+      document.getElementById('news-img').alt            = data.title;
+      document.getElementById('news-content').innerHTML  = data.content;
     }
 
     function switchLang(newLang) {
       lang = newLang;
       document.documentElement.lang = newLang==='en'?'en-US':'pt-BR';
-      // traduz navbar/rodapé
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         el.textContent = T[newLang][key];
       });
-      // recarrega artigo no idioma correto
       loadArticle();
-      // ativa botão
       document.getElementById('btn-pt').classList.toggle('active', newLang==='pt');
       document.getElementById('btn-en').classList.toggle('active', newLang==='en');
     }
@@ -310,7 +346,7 @@ LINCE's role in ESC 2024 exemplifies how student-led initiatives can generate so
     document.getElementById('btn-pt').addEventListener('click', ()=> switchLang('pt'));
     document.getElementById('btn-en').addEventListener('click', ()=> switchLang('en'));
 
-    // inicializa
+    // initialize
     loadArticle();
   </script>
 </body>
